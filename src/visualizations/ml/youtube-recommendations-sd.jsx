@@ -1488,7 +1488,7 @@ export default function YouTubeRecsSD() {
           <div className="flex items-center gap-3 mb-2.5">
             <h1 className="text-xl font-bold text-stone-800 tracking-tight">YouTube Recommendations</h1>
             <Pill bg="#f3e8ff" color="#7c3aed">ML System Design</Pill>
-            <Pill bg="#fef2f2" color="#dc2626">Google L6</Pill>
+            
           </div>
           <div className="flex gap-1.5 overflow-x-auto pb-0.5 -mb-0.5">
             {SECTIONS.map(s => (
