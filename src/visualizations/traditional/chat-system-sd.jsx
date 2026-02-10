@@ -1,28 +1,28 @@
 import { useState, useRef, useEffect } from "react";
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════════════════════════
    CHAT SYSTEM (WhatsApp) — System Design Reference
    Pearl white theme · 17 sections (HLD + LLD)
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════════════════════════ */
 
 const SECTIONS = [
-  { id: "concept",       label: "Concept",             icon: "ðŸ’¡", color: "#6366f1" },
-  { id: "requirements",  label: "Requirements",         icon: "ðŸ“‹", color: "#0891b2" },
-  { id: "capacity",      label: "Capacity Estimation",  icon: "ðŸ”¢", color: "#7c3aed" },
-  { id: "api",           label: "API Design",           icon: "ðŸ”Œ", color: "#2563eb" },
-  { id: "design",        label: "High-Level Design",    icon: "ðŸ—ï¸", color: "#9333ea" },
-  { id: "algorithm",     label: "Protocol Deep Dive",   icon: "⚙ï¸", color: "#c026d3" },
-  { id: "data",          label: "Data Model",           icon: "ðŸ—„ï¸", color: "#dc2626" },
-  { id: "scalability",   label: "Scalability",          icon: "ðŸ“ˆ", color: "#059669" },
-  { id: "availability",  label: "Availability",         icon: "ðŸ›¡ï¸", color: "#d97706" },
-  { id: "observability", label: "Observability",        icon: "ðŸ“Š", color: "#0284c7" },
-  { id: "watchouts",     label: "Failure Modes",        icon: "⚠ï¸", color: "#dc2626" },
-  { id: "services",      label: "Service Architecture", icon: "ðŸ§©", color: "#0f766e" },
-  { id: "flows",         label: "Request Flows",        icon: "ðŸ”€", color: "#7e22ce" },
-  { id: "deployment",    label: "Deploy & Security",    icon: "ðŸ”’", color: "#b45309" },
-  { id: "ops",           label: "Ops Playbook",         icon: "ðŸ”§", color: "#be123c" },
-  { id: "enhancements",  label: "Enhancements",         icon: "ðŸš€", color: "#7c3aed" },
-  { id: "followups",     label: "Follow-up Questions",  icon: "â“", color: "#6366f1" },
+  { id: "concept",       label: "Concept",             icon: "💡", color: "#6366f1" },
+  { id: "requirements",  label: "Requirements",         icon: "📋", color: "#0891b2" },
+  { id: "capacity",      label: "Capacity Estimation",  icon: "🔢", color: "#7c3aed" },
+  { id: "api",           label: "API Design",           icon: "🔌", color: "#2563eb" },
+  { id: "design",        label: "High-Level Design",    icon: "🏗️", color: "#9333ea" },
+  { id: "algorithm",     label: "Protocol Deep Dive",   icon: "⚙️", color: "#c026d3" },
+  { id: "data",          label: "Data Model",           icon: "🗄️", color: "#dc2626" },
+  { id: "scalability",   label: "Scalability",          icon: "📈", color: "#059669" },
+  { id: "availability",  label: "Availability",         icon: "🛡️", color: "#d97706" },
+  { id: "observability", label: "Observability",        icon: "📊", color: "#0284c7" },
+  { id: "watchouts",     label: "Failure Modes",        icon: "⚠️", color: "#dc2626" },
+  { id: "services",      label: "Service Architecture", icon: "🧩", color: "#0f766e" },
+  { id: "flows",         label: "Request Flows",        icon: "🔀", color: "#7e22ce" },
+  { id: "deployment",    label: "Deploy & Security",    icon: "🔒", color: "#b45309" },
+  { id: "ops",           label: "Ops Playbook",         icon: "🔧", color: "#be123c" },
+  { id: "enhancements",  label: "Enhancements",         icon: "🚀", color: "#7c3aed" },
+  { id: "followups",     label: "Follow-up Questions",  icon: "❓", color: "#6366f1" },
 ];
 
 /* ─── Reusable Components ─── */
@@ -72,9 +72,9 @@ function CodeBlock({ title, code }) {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════════════════════════
    SECTIONS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════════════════════════ */
 
 function ConceptSection() {
   return (
@@ -93,12 +93,12 @@ function ConceptSection() {
           <Card>
             <Label color="#0891b2">Why Is This Hard?</Label>
             <ul className="space-y-2.5">
-              <Point icon="ðŸ“¡" color="#0891b2">Persistent connections — millions of open WebSocket connections consuming server memory and file descriptors</Point>
-              <Point icon="ðŸ“¬" color="#0891b2">Offline delivery — user is offline when message arrives. Must queue and deliver when they reconnect. Never lose a message.</Point>
-              <Point icon="ðŸ”¢" color="#0891b2">Message ordering — messages must appear in correct order even with network delays, retries, and multiple devices</Point>
-              <Point icon="ðŸ‘¥" color="#0891b2">Group chat fan-out — one message to a 500-person group = 500 deliveries, each with their own online/offline state</Point>
-              <Point icon="ðŸ”" color="#0891b2">End-to-end encryption — server can't read message content. Key exchange, forward secrecy, multi-device key management</Point>
-              <Point icon="ðŸŒ" color="#0891b2">Multi-device sync — same user on phone + laptop. Both must see all messages, read receipts, typing indicators</Point>
+              <Point icon="📡" color="#0891b2">Persistent connections — millions of open WebSocket connections consuming server memory and file descriptors</Point>
+              <Point icon="📬" color="#0891b2">Offline delivery — user is offline when message arrives. Must queue and deliver when they reconnect. Never lose a message.</Point>
+              <Point icon="🔢" color="#0891b2">Message ordering — messages must appear in correct order even with network delays, retries, and multiple devices</Point>
+              <Point icon="👥" color="#0891b2">Group chat fan-out — one message to a 500-person group = 500 deliveries, each with their own online/offline state</Point>
+              <Point icon="🔐" color="#0891b2">End-to-end encryption — server can't read message content. Key exchange, forward secrecy, multi-device key management</Point>
+              <Point icon="🌍" color="#0891b2">Multi-device sync — same user on phone + laptop. Both must see all messages, read receipts, typing indicators</Point>
             </ul>
           </Card>
         </div>
@@ -126,7 +126,7 @@ function ConceptSection() {
             <svg viewBox="0 0 360 120" className="w-full">
               <rect x={10} y={10} width={160} height={45} rx={6} fill="#dc262608" stroke="#dc2626" strokeWidth={1.5}/>
               <text x={90} y={28} textAnchor="middle" fill="#dc2626" fontSize="10" fontWeight="700" fontFamily="monospace">HTTP Polling</text>
-              <text x={90} y={44} textAnchor="middle" fill="#dc262680" fontSize="8" fontFamily="monospace">âŒ High latency, wasteful</text>
+              <text x={90} y={44} textAnchor="middle" fill="#dc262680" fontSize="8" fontFamily="monospace">❌ High latency, wasteful</text>
 
               <rect x={190} y={10} width={160} height={45} rx={6} fill="#05966908" stroke="#059669" strokeWidth={1.5}/>
               <text x={270} y={28} textAnchor="middle" fill="#059669" fontSize="10" fontWeight="700" fontFamily="monospace">WebSocket ★</text>
@@ -157,7 +157,7 @@ function RequirementsSection() {
     <div className="space-y-5">
       <Card className="bg-sky-50/50 border-sky-200">
         <div className="flex items-start gap-3">
-          <span className="text-lg">ðŸ’¡</span>
+          <span className="text-lg">💡</span>
           <div>
             <div className="text-[12px] font-bold text-sky-700">Interview Tip — Scope Is Everything</div>
             <p className="text-[12px] text-stone-500 mt-0.5">"Design WhatsApp" is enormous. Clarify: 1:1 chat only, or group chat too? Text only, or media? E2E encryption? Voice/video calls? For a 45-min interview, focus on <strong>1:1 text chat + group chat + delivery guarantees + online/offline</strong>. E2E encryption and calls are follow-ups.</p>
@@ -477,7 +477,7 @@ function AlgorithmSection() {
   const topics = {
     transport: { name: "Poll vs Push (Transport)", cx: "WebSocket ★ — The Core Decision",
       desc: "Before designing anything else, you must decide HOW the server delivers messages to the client. This is the first thing to discuss in an interview. There are four options — only one is right for real-time chat.",
-      code: `# 1. HTTP Polling (âŒ Don't use)
+      code: `# 1. HTTP Polling (❌ Don't use)
 while True:
     response = HTTP_GET("/messages?since=last_ts")
     # Problem: 150M users × 1 poll/sec = 150M req/sec
@@ -485,7 +485,7 @@ while True:
     # Latency: up to 1 second (poll interval)
     sleep(1)
 
-# 2. Long Polling (⚠ï¸ Better, but still not ideal)
+# 2. Long Polling (⚠️ Better, but still not ideal)
 while True:
     response = HTTP_GET("/messages?since=last_ts")
     # Server HOLDS the request open until:
@@ -496,7 +496,7 @@ while True:
     #   - HTTP overhead on every reconnect (headers, TLS)
     #   - Server holds open connections anyway
 
-# 3. Server-Sent Events / SSE (⚠ï¸ Half solution)
+# 3. Server-Sent Events / SSE (⚠️ Half solution)
 source = EventSource("/messages/stream")
 source.onmessage = handle_new_message
 # Server pushes, but client can't send through it
@@ -634,9 +634,9 @@ encrypted = double_ratchet.encrypt(shared_secret, plaintext)
             </tr></thead>
             <tbody>
               {[
-                { n:"HTTP Polling", dir:"Client → Server", lat:"Up to 1s (poll interval)", oh:"~800B headers per poll", cost:"150M req/sec (99% empty)", v:"âŒ", hl:false },
-                { n:"Long Polling", dir:"Half-duplex", lat:"~Instant (held request)", oh:"New HTTP req per response", cost:"150M held conns + reconnect overhead", v:"⚠ï¸", hl:false },
-                { n:"SSE", dir:"Server → Client only", lat:"~Instant (push)", oh:"Text only, no binary", cost:"150M conns + separate POST channel", v:"⚠ï¸", hl:false },
+                { n:"HTTP Polling", dir:"Client → Server", lat:"Up to 1s (poll interval)", oh:"~800B headers per poll", cost:"150M req/sec (99% empty)", v:"❌", hl:false },
+                { n:"Long Polling", dir:"Half-duplex", lat:"~Instant (held request)", oh:"New HTTP req per response", cost:"150M held conns + reconnect overhead", v:"⚠️", hl:false },
+                { n:"SSE", dir:"Server → Client only", lat:"~Instant (push)", oh:"Text only, no binary", cost:"150M conns + separate POST channel", v:"⚠️", hl:false },
                 { n:"WebSocket ★", dir:"Full-duplex ✓", lat:"<100ms (persistent)", oh:"2-byte frame header", cost:"150M persistent conns (most efficient)", v:"✓", hl:true },
               ].map((r,i) => (
                 <tr key={i} className={r.hl ? "bg-purple-50" : i%2 ? "bg-stone-50/50" : ""}>
@@ -654,21 +654,21 @@ encrypted = double_ratchet.encrypt(shared_secret, plaintext)
         <div className="mt-3 grid grid-cols-4 gap-3">
           <div className="rounded-lg border border-red-200 bg-red-50/30 p-2.5 text-center">
             <div className="text-[10px] font-bold text-red-600">HTTP Polling</div>
-            <div className="text-[20px] mt-1">ðŸ”„</div>
+            <div className="text-[20px] mt-1">🔄</div>
             <div className="text-[9px] text-stone-400 mt-1">Client asks every 1s</div>
             <div className="text-[9px] text-stone-400">"Any new messages?"</div>
             <div className="text-[9px] text-red-500 mt-1 font-medium">99% wasted requests</div>
           </div>
           <div className="rounded-lg border border-amber-200 bg-amber-50/30 p-2.5 text-center">
             <div className="text-[10px] font-bold text-amber-600">Long Polling</div>
-            <div className="text-[20px] mt-1">â³</div>
+            <div className="text-[20px] mt-1">⏳</div>
             <div className="text-[9px] text-stone-400 mt-1">Server holds request open</div>
             <div className="text-[9px] text-stone-400">Returns when msg arrives</div>
             <div className="text-[9px] text-amber-600 mt-1 font-medium">Better, but half-duplex</div>
           </div>
           <div className="rounded-lg border border-blue-200 bg-blue-50/30 p-2.5 text-center">
             <div className="text-[10px] font-bold text-blue-600">Server-Sent Events</div>
-            <div className="text-[20px] mt-1">ðŸ“¡</div>
+            <div className="text-[20px] mt-1">📡</div>
             <div className="text-[9px] text-stone-400 mt-1">Server pushes events</div>
             <div className="text-[9px] text-stone-400">Client can't send back</div>
             <div className="text-[9px] text-blue-600 mt-1 font-medium">One-way only</div>
@@ -987,9 +987,9 @@ function WatchoutsSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════════════════════════
    LLD — Implementation Architecture Sections
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════════════════════════ */
 
 function ServicesSection() {
   return (
@@ -1535,7 +1535,7 @@ function FollowupsSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════ */
 const SECTION_COMPONENTS = {
   concept: ConceptSection, requirements: RequirementsSection, capacity: CapacitySection,
   api: ApiSection, design: DesignSection, algorithm: AlgorithmSection, data: DataModelSection,

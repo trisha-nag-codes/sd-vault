@@ -1,28 +1,28 @@
 import { useState, useRef, useEffect } from "react";
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════════════════════════
    NEWS FEED — System Design Reference
    Pearl white theme · 17 sections (HLD + LLD)
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════════════════════════ */
 
 const SECTIONS = [
-  { id: "concept",       label: "Concept",             icon: "ðŸ’¡", color: "#6366f1" },
-  { id: "requirements",  label: "Requirements",         icon: "ðŸ“‹", color: "#0891b2" },
-  { id: "capacity",      label: "Capacity Estimation",  icon: "ðŸ”¢", color: "#7c3aed" },
-  { id: "api",           label: "API Design",           icon: "ðŸ”Œ", color: "#2563eb" },
-  { id: "design",        label: "High-Level Design",    icon: "ðŸ—ï¸", color: "#9333ea" },
-  { id: "algorithm",     label: "Fan-Out Deep Dive",    icon: "⚙ï¸", color: "#c026d3" },
-  { id: "data",          label: "Data Model",           icon: "ðŸ—„ï¸", color: "#dc2626" },
-  { id: "scalability",   label: "Scalability",          icon: "ðŸ“ˆ", color: "#059669" },
-  { id: "availability",  label: "Availability",         icon: "ðŸ›¡ï¸", color: "#d97706" },
-  { id: "observability", label: "Observability",        icon: "ðŸ“Š", color: "#0284c7" },
-  { id: "watchouts",     label: "Failure Modes",        icon: "⚠ï¸", color: "#dc2626" },
-  { id: "services",      label: "Service Architecture", icon: "ðŸ§©", color: "#0f766e" },
-  { id: "flows",         label: "Request Flows",        icon: "ðŸ”€", color: "#7e22ce" },
-  { id: "deployment",    label: "Deploy & Security",    icon: "ðŸ”’", color: "#b45309" },
-  { id: "ops",           label: "Ops Playbook",         icon: "ðŸ”§", color: "#be123c" },
-  { id: "enhancements",  label: "Enhancements",         icon: "ðŸš€", color: "#7c3aed" },
-  { id: "followups",     label: "Follow-up Questions",  icon: "â“", color: "#6366f1" },
+  { id: "concept",       label: "Concept",             icon: "💡", color: "#6366f1" },
+  { id: "requirements",  label: "Requirements",         icon: "📋", color: "#0891b2" },
+  { id: "capacity",      label: "Capacity Estimation",  icon: "🔢", color: "#7c3aed" },
+  { id: "api",           label: "API Design",           icon: "🔌", color: "#2563eb" },
+  { id: "design",        label: "High-Level Design",    icon: "🏗️", color: "#9333ea" },
+  { id: "algorithm",     label: "Fan-Out Deep Dive",    icon: "⚙️", color: "#c026d3" },
+  { id: "data",          label: "Data Model",           icon: "🗄️", color: "#dc2626" },
+  { id: "scalability",   label: "Scalability",          icon: "📈", color: "#059669" },
+  { id: "availability",  label: "Availability",         icon: "🛡️", color: "#d97706" },
+  { id: "observability", label: "Observability",        icon: "📊", color: "#0284c7" },
+  { id: "watchouts",     label: "Failure Modes",        icon: "⚠️", color: "#dc2626" },
+  { id: "services",      label: "Service Architecture", icon: "🧩", color: "#0f766e" },
+  { id: "flows",         label: "Request Flows",        icon: "🔀", color: "#7e22ce" },
+  { id: "deployment",    label: "Deploy & Security",    icon: "🔒", color: "#b45309" },
+  { id: "ops",           label: "Ops Playbook",         icon: "🔧", color: "#be123c" },
+  { id: "enhancements",  label: "Enhancements",         icon: "🚀", color: "#7c3aed" },
+  { id: "followups",     label: "Follow-up Questions",  icon: "❓", color: "#6366f1" },
 ];
 
 /* ─── Reusable Components ─── */
@@ -97,9 +97,9 @@ function Arrow({ x1,y1,x2,y2,label,dashed,id }) {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════════════════════════
    SECTIONS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════════════════════════ */
 
 function ConceptSection() {
   return (
@@ -118,11 +118,11 @@ function ConceptSection() {
           <Card>
             <Label color="#0891b2">Why Is This Hard?</Label>
             <ul className="space-y-2.5">
-              <Point icon="ðŸ“Š" color="#0891b2">Scale asymmetry — one post from a celebrity creates 50M feed updates. One post from a normal user creates 200.</Point>
-              <Point icon="â±ï¸" color="#0891b2">Latency expectations — users expect feed to load in &lt;500ms with fresh content, not minutes-old stale data</Point>
-              <Point icon="ðŸ”€" color="#0891b2">Ranking complexity — chronological is simple but engagement-based ranking requires ML models scoring thousands of candidates</Point>
-              <Point icon="ðŸ’¾" color="#0891b2">Storage explosion — pre-computing feeds for 1B users × 500 posts each = petabytes of duplicated data</Point>
-              <Point icon="ðŸ”„" color="#0891b2">Consistency vs freshness — user posts, then checks their own feed and doesn't see it (read-after-write consistency)</Point>
+              <Point icon="📊" color="#0891b2">Scale asymmetry — one post from a celebrity creates 50M feed updates. One post from a normal user creates 200.</Point>
+              <Point icon="⏱️" color="#0891b2">Latency expectations — users expect feed to load in &lt;500ms with fresh content, not minutes-old stale data</Point>
+              <Point icon="🔀" color="#0891b2">Ranking complexity — chronological is simple but engagement-based ranking requires ML models scoring thousands of candidates</Point>
+              <Point icon="💾" color="#0891b2">Storage explosion — pre-computing feeds for 1B users × 500 posts each = petabytes of duplicated data</Point>
+              <Point icon="🔄" color="#0891b2">Consistency vs freshness — user posts, then checks their own feed and doesn't see it (read-after-write consistency)</Point>
             </ul>
           </Card>
         </div>
@@ -184,7 +184,7 @@ function RequirementsSection() {
     <div className="space-y-5">
       <Card className="bg-sky-50/50 border-sky-200">
         <div className="flex items-start gap-3">
-          <span className="text-lg">ðŸ’¡</span>
+          <span className="text-lg">💡</span>
           <div>
             <div className="text-[12px] font-bold text-sky-700">Interview Tip — Scope Immediately</div>
             <p className="text-[12px] text-stone-500 mt-0.5">"News feed" can mean many things. Clarify: Are we building the feed generation pipeline, the ranking system, or the full social graph? For a 45-min interview, focus on <strong>feed generation + delivery</strong>. Ranking can be a follow-up. Don't try to design the entire social network.</p>
@@ -241,7 +241,7 @@ function CapacitySection() {
     <div className="space-y-5">
       <Card className="bg-violet-50/50 border-violet-200">
         <div className="flex items-start gap-3">
-          <span className="text-lg">ðŸ’¡</span>
+          <span className="text-lg">💡</span>
           <div>
             <div className="text-[12px] font-bold text-violet-700">Interview Tip — Derive, Don't Memorize</div>
             <p className="text-[12px] text-stone-500 mt-0.5">Walk through each step aloud. The interviewer cares about your reasoning process, not the exact number. Round aggressively: 86,400 ≈ 100K, 500M × 200 ≈ 100B.</p>
@@ -403,7 +403,7 @@ function DesignSection() {
         <Arrow x1={245} y1={50} x2={300} y2={60} id="p3"/>
         <Arrow x1={245} y1={65} x2={300} y2={92} id="p4"/>
         <rect x={90} y={130} width={260} height={20} rx={4} fill="#dc262608" stroke="#dc262630"/>
-        <text x={220} y={142} textAnchor="middle" fill="#dc2626" fontSize="8" fontFamily="monospace">âŒ 500 queries per feed load — too slow at scale</text>
+        <text x={220} y={142} textAnchor="middle" fill="#dc2626" fontSize="8" fontFamily="monospace">❌ 500 queries per feed load — too slow at scale</text>
       </svg>
     ),
     () => (
@@ -619,7 +619,7 @@ rank_feed(user_id, candidate_posts):
             </tr></thead>
             <tbody>
               {[
-                { n:"Push (FoW) ★", w:"O(followers)", r:"O(1)", l:"Read: <10ms", c:"âŒ Breaks", u:"Twitter, Instagram", hl:true },
+                { n:"Push (FoW) ★", w:"O(followers)", r:"O(1)", l:"Read: <10ms", c:"❌ Breaks", u:"Twitter, Instagram", hl:true },
                 { n:"Pull (FoR)", w:"O(1)", r:"O(following)", l:"Read: 100-500ms", c:"✓ Fine", u:"TikTok (rec-based)" },
                 { n:"Hybrid ★★", w:"O(non-celeb)", r:"O(celeb follows)", l:"Read: 10-50ms", c:"✓ Handled", u:"Facebook, LinkedIn", hl:true },
               ].map((r,i) => (
@@ -944,9 +944,9 @@ function WatchoutsSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════════════════════════
    LLD — Implementation Architecture Sections
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   ═══════════════════════════════════════════════════════════ */
 
 function ServicesSection() {
   return (
@@ -1446,7 +1446,7 @@ function FollowupsSection() {
   );
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* ═══════════════════════════════════════════════════════════ */
 const SECTION_COMPONENTS = {
   concept: ConceptSection, requirements: RequirementsSection, capacity: CapacitySection,
   api: ApiSection, design: DesignSection, algorithm: AlgorithmSection, data: DataModelSection,

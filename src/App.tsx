@@ -22,6 +22,7 @@ const GoogleDriveSD = lazy(() => import("./visualizations/traditional/google-dri
 const GoogleDocsSD = lazy(() => import("./visualizations/traditional/google-docs-sd.jsx"));
 const InstagramSD = lazy(() => import("./visualizations/traditional/instagram-sd.jsx"));
 const GoogleMapsSD = lazy(() => import("./visualizations/traditional/google-maps-sd.jsx"));
+const TicketBookingSD = lazy(() => import("./visualizations/traditional/ticket-booking-sd.jsx"));
 
 // ─── ML SD lazy imports ───
 const SearchRankingSD = lazy(() => import("./visualizations/ml/search-ranking-sd.jsx"));
@@ -59,6 +60,7 @@ const TRADITIONAL: Topic[] = [
   { key: "google-docs",         label: "Google Docs (Collab)",   emoji: "📝", component: GoogleDocsSD,         tier: "Tier 3" },
   { key: "instagram",           label: "Instagram / Social",     emoji: "📸", component: InstagramSD,          tier: "Tier 3" },
   { key: "google-maps",         label: "Google Maps (Collab)",   emoji: "🗺️", component: GoogleMapsSD,         tier: "Tier 3" },
+  { key: "ticket-booking", label: "Ticket Booking (Ticketmaster)", emoji: "🎟️", component: TicketBookingSD, tier: "Tier 1" },
 ];
 
 const ML: Topic[] = [
@@ -331,7 +333,7 @@ function LandingPage() {
       {/* Footer */}
       <div className="border-t border-stone-200 py-6 text-center">
         <p className="text-[10px] text-stone-400">
-          SD Vault — Staff+ System Design Interview Prep • 24 topics • 408 sections
+          SD Vault — Staff+ System Design Interview Prep • 25 topics • 425 sections
         </p>
       </div>
     </div>
